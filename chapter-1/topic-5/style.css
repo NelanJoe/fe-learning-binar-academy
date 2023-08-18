@@ -1,0 +1,61 @@
+/* Mobile screen that very small < 578px */
+
+/* Small version screen > 578px */
+@media (min-width: 578px) {
+  body {
+    background-color: slategrey;
+    color: white;
+  }
+
+  h1 {
+    font-size: small;
+  }
+}
+
+/* Medium version screen > 578px */
+@media (min-width: 768px) {
+  body {
+    background-color: slateblue;
+    color: white;
+  }
+
+  h1 {
+    font-size: medium;
+  }
+}
+
+/* Medium version screen > 768px (tablets) */
+@media (min-width: 768px) {
+  body {
+    background-color: slateblue;
+    color: white;
+  }
+
+  h1 {
+    font-size: medium;
+  }
+}
+
+/* Large version screen > 992px (Laptop) */
+@media (min-width: 992px) {
+  body {
+    background-color: greenyellow;
+    color: white;
+  }
+
+  h1 {
+    font-size: large;
+  }
+}
+
+/* XtraLarge version screen > 1200px (2K Monitor) */
+@media (min-width: 1200px) {
+  body {
+    background-color: pink;
+    color: white;
+  }
+
+  h1 {
+    font-size: xx-large;
+  }
+}
