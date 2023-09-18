@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ComparisonComponent from "../components/ComparisonComponent";
-import "../App.css";
+import Layout from "../layouts/Layout";
+import { Card } from "react-bootstrap";
 
 const Comparison = () => {
   const [personOne, setPersonOne] = useState("");
@@ -28,22 +29,26 @@ const Comparison = () => {
   };
 
   return (
-    <div className="app">
-      <ComparisonComponent
-        personOne={personOne}
-        personTwo={personTwo}
-        isChecked={isChecked}
-        isSamePerson={isSamePerson}
-        setPersonOne={setPersonOne}
-        setPersonTwo={setPersonTwo}
-        checkIsSamePerson={checkIsSamePerson}
-        setIsChecked={setIsChecked}
-      >
-        <div>
-          <h1>Children nih</h1>
-        </div>
-      </ComparisonComponent>
-    </div>
+    <Layout>
+      <Card>
+        <Card.Body>
+          <ComparisonComponent
+            personOne={personOne}
+            personTwo={personTwo}
+            isChecked={isChecked}
+            isSamePerson={isSamePerson}
+            setPersonOne={setPersonOne}
+            setPersonTwo={setPersonTwo}
+            checkIsSamePerson={checkIsSamePerson}
+            setIsChecked={setIsChecked}
+          >
+            <div>
+              <h1>Children nih</h1>
+            </div>
+          </ComparisonComponent>
+        </Card.Body>
+      </Card>
+    </Layout>
   );
 };
 

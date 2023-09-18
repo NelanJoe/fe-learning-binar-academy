@@ -1,10 +1,10 @@
-import "../App.css";
+import Layout from "../layouts/Layout";
 
 const Error = () => {
   return (
-    <div>
+    <Layout>
       <p>404 Not Found</p>
-    </div>
+    </Layout>
   );
 };
 

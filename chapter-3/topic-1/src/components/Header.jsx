@@ -1,42 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
 const Header = () => {
   return (
-    <header>
-      <nav
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "1.2rem",
-          marginBottom: "2rem",
-        }}
-      >
-        <NavLink
-          to="/"
-          style={({ isActive }) => {
-            return {
-              textDecoration: isActive ? "underline" : "",
-              color: isActive ? "pink" : "grey",
-            };
-          }}
-        >
+    <Navbar expand="lg" className="bg-body-tertiary">
+      <Container>
+        <Navbar.Brand to="/" as={Link}>
           Home
-        </NavLink>
-        <div>
-          <NavLink
-            style={({ isActive }) => {
-              return {
-                textDecoration: isActive ? "underline" : "",
-                color: isActive ? "pink" : "grey",
-              };
-            }}
-            to="/comparison"
-          >
-            Comparison
-          </NavLink>
-        </div>
-      </nav>
-    </header>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link as={Link} to="/comparison">
+              Comparison
+            </Nav.Link>
+            <Nav.Link as={Link} to="/module-styles">
+              Module Styles
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

@@ -1,10 +1,10 @@
-import "../App.css";
+import Layout from "../layouts/Layout";
 
 const Home = () => {
   return (
-    <div className="app">
+    <Layout>
       <h1>Hello ini adalah halaman home</h1>
-    </div>
+    </Layout>
   );
 };
 
