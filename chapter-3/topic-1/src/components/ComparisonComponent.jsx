@@ -14,10 +14,6 @@ const ComparisonComponent = ({
   children,
 }) => {
   useEffect(() => {
-    console.log("Hello, World");
-  });
-
-  useEffect(() => {
     if (personOne && personTwo) {
       setIsChecked(true);
       checkIsSamePerson();
@@ -48,7 +44,7 @@ const ComparisonComponent = ({
           onChange={(e) => setPersonTwo(e.target.value)}
         />
       </InputGroup>
-      
+
       <div>
         <h2>
           {isChecked &&

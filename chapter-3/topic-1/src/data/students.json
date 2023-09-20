@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Budi Santoso",
+    "class": "Frontend Javascript"
+  },
+  {
+    "id": 2,
+    "name": "Joko Susanto",
+    "class": "Frontend Javascript"
+  },
+  {
+    "id": 3,
+    "name": "Susan Sameeh",
+    "class": "Frontend Javascript"
+  },
+  {
+    "id": 4,
+    "name": "Annisa",
+    "class": "Frontend Javascript"
+  },
+  {
+    "id": 5,
+    "name": "Gugun",
+    "class": "Frontend Javascript"
+  },
+  {
+    "id": 6,
+    "name": "Andi",
+    "class": "Frontend Javascript"
+  }
+]

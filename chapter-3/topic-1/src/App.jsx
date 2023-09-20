@@ -5,6 +5,7 @@ import Error from "./pages/Error";
 import Header from "./components/Header";
 import ModuleStylesPage from "./pages/ModuleStylesPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Students from "./pages/Students";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/comparison" element={<Comparison />} />
         <Route path="/module-styles" element={<ModuleStylesPage />} />
+        <Route path="/students" element={<Students />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

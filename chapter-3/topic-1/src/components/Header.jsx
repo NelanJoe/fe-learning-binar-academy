@@ -14,6 +14,9 @@ const Header = () => {
             <Nav.Link as={Link} to="/comparison">
               Comparison
             </Nav.Link>
+            <Nav.Link as={Link} to="/students">
+              Students
+            </Nav.Link>
             <Nav.Link as={Link} to="/module-styles">
               Module Styles
             </Nav.Link>
