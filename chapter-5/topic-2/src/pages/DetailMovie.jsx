@@ -61,6 +61,10 @@ const DetailMovie = () => {
   const genres =
     movie?.genres?.map((genre) => genre.name)?.join(", ") || "Not found genres";
 
+  const idTrailer = movieTrailer
+    ?.filter((trailer) => trailer.type)
+    ?.find((t) => t.type === "Trailer");
+
   return (
     <Suspense fallback={<div>Loading....</div>}>
       <Card>
@@ -91,25 +95,18 @@ const DetailMovie = () => {
                 <CardText>Genre: {genres}</CardText>
                 <CardText>{movie?.overview}</CardText>
                 <Suspense fallback={<div>Loading Content....</div>}>
-                  {movieTrailer.length ? (
-                    <div
-                      className="row justify-content-center justify-content-md-start mb-5"
-                      style={{ gap: "2rem" }}
-                    >
-                      {movieTrailer.slice(0, 3)?.map((trailer) => (
-                        <div className="col col-md-4" key={trailer.key}>
-                          <div className="">
-                            <iframe
-                              src={`https://www.youtube.com/embed/${trailer?.key}?rel=0`}
-                              title={trailer.name}
-                            ></iframe>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
+                  {movieTrailer.length === 0 ? (
                     <div className="fst-italic fw-bold fs-5 text-danger">
                       <p>Not found tailer</p>
+                    </div>
+                  ) : (
+                    <div className="d-flex flex-wrap gap-4">
+                      <div>
+                        <iframe
+                          src={`https://www.youtube.com/embed/${idTrailer?.key}?rel=0`}
+                          title={idTrailer?.name}
+                        ></iframe>
+                      </div>
                     </div>
                   )}
                 </Suspense>
