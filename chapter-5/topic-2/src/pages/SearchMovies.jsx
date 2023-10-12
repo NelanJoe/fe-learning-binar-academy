@@ -10,25 +10,36 @@ const SearchMovies = () => {
   const title = searchParams.get("title");
 
   const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN;
+  const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
+    // Token
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
     const getDataMovies = async (movieTitle) => {
       try {
         const { data } = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?query=${movieTitle}&include_adult=false&language=en-US&page=1`,
+          `${API_URL}/api/v1/search/movie?page=1&query=${movieTitle}`,
           {
             headers: {
-              Authorization: `Bearer ${AUTH_TOKEN}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
-        setDataSearchMovies(data?.results);
+        setDataSearchMovies(data?.data);
       } catch (error) {
+        if (axios.AxiosError(error)) {
+          console.error(error?.reponse?.data?.status_message);
+          return;
+        }
+
         throw new Error(error);
       }
     };
 
     getDataMovies(title);
-  }, [AUTH_TOKEN, title]);
+  }, [AUTH_TOKEN, API_URL, title]);
 
   return (
     <>

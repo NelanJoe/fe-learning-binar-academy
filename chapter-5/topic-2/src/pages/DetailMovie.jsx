@@ -18,20 +18,21 @@ const DetailMovie = () => {
   const [movieTrailer, setMovieTrailer] = useState([]);
 
   const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN;
+  const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const getDetailMovie = async (movieId) => {
       try {
-        const { data } = await axios.get(
-          `
-        https://api.themoviedb.org/3/movie/${movieId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${AUTH_TOKEN}`,
-            },
-          }
-        );
+        const token = localStorage.getItem("token");
 
-        setMovie(data);
+        if (!token) return;
+
+        const { data } = await axios.get(`${API_URL}/api/v1/movie/${movieId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setMovie(data.data);
       } catch (err) {
         throw new Error(err);
       }
@@ -56,7 +57,7 @@ const DetailMovie = () => {
 
     getDetailMovie(movieId);
     getVideos(movieId);
-  }, [AUTH_TOKEN, movieId]);
+  }, [AUTH_TOKEN, movieId, API_URL]);
 
   const genres =
     movie?.genres?.map((genre) => genre.name)?.join(", ") || "Not found genres";
@@ -64,6 +65,15 @@ const DetailMovie = () => {
   const idTrailer = movieTrailer
     ?.filter((trailer) => trailer.type)
     ?.find((t) => t.type === "Trailer");
+
+  let imgSrc;
+  if (!movie.poster_path || !movie.backdrop_path) {
+    imgSrc = `https://fakeimg.pl/400x400/?text=Not+Image&font=noto`;
+  } else {
+    imgSrc = `https://image.tmdb.org/t/p/original/${
+      movie.poster_path || movie.backdrop_path
+    }`;
+  }
 
   return (
     <Suspense fallback={<div>Loading....</div>}>
@@ -73,9 +83,7 @@ const DetailMovie = () => {
             <Row>
               <Col md={4}>
                 <CardImg
-                  src={`https://image.tmdb.org/t/p/original/${
-                    movie?.poster_path || movie?.backdrop_path
-                  }`}
+                  src={imgSrc}
                   alt={movie?.title}
                   style={{
                     width: "100%",

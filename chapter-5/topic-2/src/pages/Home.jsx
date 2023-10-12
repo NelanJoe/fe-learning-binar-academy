@@ -4,7 +4,6 @@ import Search from "../components/Search";
 import MovieList from "../components/MovieList";
 
 const Home = () => {
-  const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN;
   const API_URL = import.meta.env.VITE_API_URL;
 
   const [popularMovies, setPopularMovies] = useState([]);
@@ -12,16 +11,19 @@ const Home = () => {
   useEffect(() => {
     const getPopularMovies = async () => {
       try {
-        const { data } = await axios.get(
-          `${API_URL}/3/movie/popular?language=en-US&page=1`,
-          {
-            headers: {
-              Authorization: `Bearer ${AUTH_TOKEN}`,
-            },
-          }
-        );
+        const token = localStorage.getItem("token");
 
-        setPopularMovies(data?.results);
+        if (!token) return;
+
+        const { data } = await axios.get(`${API_URL}/api/v1/movie/popular`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        console.log("~🚀 Popular Movies", data);
+
+        setPopularMovies(data?.data);
       } catch (error) {
         if (axios.AxiosError(error)) {
           console.error(error?.reponse?.data?.status_message);
@@ -32,7 +34,7 @@ const Home = () => {
       }
     };
     getPopularMovies();
-  }, [AUTH_TOKEN, API_URL]);
+  }, [API_URL]);
 
   return (
     <>
