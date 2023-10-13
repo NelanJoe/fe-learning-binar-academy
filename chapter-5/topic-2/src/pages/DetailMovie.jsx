@@ -12,13 +12,13 @@ import {
 } from "react-bootstrap";
 
 const DetailMovie = () => {
+  const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN;
+  const API_URL = import.meta.env.VITE_API_URL;
   const { movieId } = useParams();
 
   const [movie, setMovie] = useState([]);
   const [movieTrailer, setMovieTrailer] = useState([]);
 
-  const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN;
-  const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const getDetailMovie = async (movieId) => {
       try {
@@ -32,31 +32,14 @@ const DetailMovie = () => {
           },
         });
 
-        setMovie(data.data);
-      } catch (err) {
-        throw new Error(err);
-      }
-    };
-
-    const getVideos = async (movieId) => {
-      try {
-        const { data } = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-          {
-            headers: {
-              Authorization: `Bearer ${AUTH_TOKEN}`,
-            },
-          }
-        );
-
-        setMovieTrailer(data?.results);
+        setMovie(data?.data);
+        setMovieTrailer(data?.data?.videos);
       } catch (err) {
         throw new Error(err);
       }
     };
 
     getDetailMovie(movieId);
-    getVideos(movieId);
   }, [AUTH_TOKEN, movieId, API_URL]);
 
   const genres =
@@ -70,7 +53,7 @@ const DetailMovie = () => {
   if (!movie.poster_path || !movie.backdrop_path) {
     imgSrc = `https://fakeimg.pl/400x400/?text=Not+Image&font=noto`;
   } else {
-    imgSrc = `https://image.tmdb.org/t/p/original/${
+    imgSrc = `https://image.tmdb.org/t/p/w780/${
       movie.poster_path || movie.backdrop_path
     }`;
   }

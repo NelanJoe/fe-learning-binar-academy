@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Card, CardBody, CardHeader, Form } from "react-bootstrap";
+import GoogleLogin from "../components/GoogleLogin";
 
 const Login = () => {
   const { VITE_API_URL: API_URL } = import.meta.env;
@@ -26,9 +27,8 @@ const Login = () => {
         formData
       );
 
-      const token = data.data.token;
+      const token = data?.data?.token;
 
-      console.log("~🚀 Token", token);
       // Save token to localStorage
       localStorage.setItem("token", token);
 
@@ -76,6 +76,10 @@ const Login = () => {
             Submit
           </Button>
         </Form>
+        <div>Or</div>
+        <div>
+          <GoogleLogin text="Sign in With Google 🚀" />
+        </div>
       </CardBody>
     </Card>
   );

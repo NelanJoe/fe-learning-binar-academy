@@ -21,8 +21,6 @@ const Home = () => {
           },
         });
 
-        console.log("~🚀 Popular Movies", data);
-
         setPopularMovies(data?.data);
       } catch (error) {
         if (axios.AxiosError(error)) {
