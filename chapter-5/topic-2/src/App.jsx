@@ -19,38 +19,12 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route
-        index
-        element={
-          <Protected>
-            <Home />
-          </Protected>
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          <Protected>
-            <Profile />
-          </Protected>
-        }
-      />
-      <Route
-        path="/search"
-        element={
-          <Protected>
-            <SearchMovies />
-          </Protected>
-        }
-      />
-      <Route
-        path="/movie/:movieId"
-        element={
-          <Protected>
-            <DetailMovie />
-          </Protected>
-        }
-      />
+      <Route element={<Protected />}>
+        <Route index element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/search" element={<SearchMovies />} />
+        <Route path="/movie/:movieId" element={<DetailMovie />} />
+      </Route>
 
       {/* Authentication */}
       <Route

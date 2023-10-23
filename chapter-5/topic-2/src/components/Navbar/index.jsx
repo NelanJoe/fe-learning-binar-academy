@@ -41,7 +41,7 @@ const NavbarComponent = () => {
 
     setUser(null);
 
-    window.location.replace("/");
+    window.location.replace("/login");
   };
 
   return (
