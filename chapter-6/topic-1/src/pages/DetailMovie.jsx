@@ -16,29 +16,26 @@ import {
 const DetailMovie = () => {
   const { movieId } = useParams();
 
-  const { detailMovie, videos } = useSelector((state) => state.movie);
+  const { detailMovie: movie, videos } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getDetailMovie(movieId));
   }, [dispatch, movieId]);
 
-  console.log("DetailMovie", detailMovie);
-
   const genres =
-    detailMovie?.genres?.map((genre) => genre.name)?.join(", ") ||
-    "Not found genres";
+    movie?.genres?.map((genre) => genre.name)?.join(", ") || "Not found genres";
 
   const idTrailer = videos
     ?.filter((trailer) => trailer.type)
     ?.find((t) => t.type === "Trailer");
 
   let imgSrc;
-  if (!detailMovie.poster_path || !detailMovie.backdrop_path) {
+  if (!movie.poster_path || !movie.backdrop_path) {
     imgSrc = `https://fakeimg.pl/400x400/?text=Not+Image&font=noto`;
   } else {
     imgSrc = `https://image.tmdb.org/t/p/w780/${
-      detailMovie.poster_path || detailMovie.backdrop_path
+      movie.poster_path || movie.backdrop_path
     }`;
   }
 
@@ -51,7 +48,7 @@ const DetailMovie = () => {
               <Col md={4}>
                 <CardImg
                   src={imgSrc}
-                  alt={detailMovie?.title}
+                  alt={movie?.title}
                   style={{
                     width: "100%",
                     height: "100%",
@@ -61,16 +58,14 @@ const DetailMovie = () => {
               </Col>
               <Col>
                 <CardTitle className="my-3 fw-bold fs-1">
-                  {detailMovie?.title}
+                  {movie?.title}
                 </CardTitle>
+                <CardText>Original title: {movie?.original_title}</CardText>
                 <CardText>
-                  Original title: {detailMovie?.original_title}
-                </CardText>
-                <CardText>
-                  Rating: <span>⭐</span> {detailMovie?.vote_average}
+                  Rating: <span>⭐</span> {movie?.vote_average}
                 </CardText>
                 <CardText>Genre: {genres}</CardText>
-                <CardText>{detailMovie?.overview}</CardText>
+                <CardText>{movie?.overview}</CardText>
                 <Suspense fallback={<div>Loading Content....</div>}>
                   {videos.length === 0 ? (
                     <div className="fst-italic fw-bold fs-5 text-danger">

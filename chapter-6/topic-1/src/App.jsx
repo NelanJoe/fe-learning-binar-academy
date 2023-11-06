@@ -40,7 +40,7 @@ const routes = createBrowserRouter(
 );
 
 const App = () => {
-  const clientId = import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID;
+  const { VITE_GOOGLE_OAUTH_CLIENT_ID: clientId } = import.meta.env;
 
   return (
     <Provider store={store}>
