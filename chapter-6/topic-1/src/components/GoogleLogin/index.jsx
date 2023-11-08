@@ -1,10 +1,11 @@
-import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
-import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
-import { registerLoginWithGoogleAction } from "../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
 import { toast } from "sonner";
+import PropTypes from "prop-types";
+
+import { registerLoginWithGoogleAction } from "../../redux/actions/authActions";
 
 const GoogleLogin = ({ text }) => {
   const dispatch = useDispatch();
